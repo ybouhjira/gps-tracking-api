@@ -22,6 +22,11 @@ class User
     private $id;
 
     /**
+    * @ORM\OneToMany(targetEntity="Track", mappedBy="user")
+    */
+    protected $tracks;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=30)
@@ -34,6 +39,10 @@ class User
      * @ORM\Column(name="password", type="string", length=100)
      */
     private $password;
+
+    public function __construct() {
+      $this->tracks = new ArrayCollection();
+    }
 
 
     /**
@@ -90,5 +99,38 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Add tracks
+     *
+     * @param \YR\UsersBundle\Entity\Track $tracks
+     * @return User
+     */
+    public function addTrack(\YR\UsersBundle\Entity\Track $tracks)
+    {
+        $this->tracks[] = $tracks;
+
+        return $this;
+    }
+
+    /**
+     * Remove tracks
+     *
+     * @param \YR\UsersBundle\Entity\Track $tracks
+     */
+    public function removeTrack(\YR\UsersBundle\Entity\Track $tracks)
+    {
+        $this->tracks->removeElement($tracks);
+    }
+
+    /**
+     * Get tracks
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTracks()
+    {
+        return $this->tracks;
     }
 }

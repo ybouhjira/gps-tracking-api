@@ -22,6 +22,12 @@ class Position
     private $id;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Track", inversedBy="positions")
+     * @ORM\JoinColumn(name="track_id", referencedColumnName="id")
+     */
+     protected $track;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="latitude", type="decimal")
@@ -90,5 +96,28 @@ class Position
     public function getLongitude()
     {
         return $this->longitude;
+    }
+
+    /**
+     * Set track
+     *
+     * @param \YR\UsersBundle\Entity\Track $track
+     * @return Position
+     */
+    public function setTrack(\YR\UsersBundle\Entity\Track $track = null)
+    {
+        $this->track = $track;
+
+        return $this;
+    }
+
+    /**
+     * Get track
+     *
+     * @return \YR\UsersBundle\Entity\Track 
+     */
+    public function getTrack()
+    {
+        return $this->track;
     }
 }
