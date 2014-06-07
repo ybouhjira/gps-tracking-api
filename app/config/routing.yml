@@ -1,0 +1,4 @@
+yr_users:
+    resource: "@YRUsersBundle/Resources/config/routing.yml"
+    prefix:   /
+
